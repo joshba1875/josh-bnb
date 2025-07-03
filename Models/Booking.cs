@@ -1,11 +1,11 @@
 namespace josh_bnb.Models;
 
-public class Booking
+public class Booking : APIEntity
 {
-    public int Id { get; set; }
+    public override string SearchKey => "Reference";
     public string Reference { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public int Room_Id { get; set; }
-    public virtual Room RoomBooked { get; set; }
+    public int People { get; set; }
+    public virtual Room Room { get; set; }
 }

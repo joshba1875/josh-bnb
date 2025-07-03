@@ -45,63 +45,126 @@ using (var scope = app.Services.CreateScope())
         new Room
         {
             Id = 1,
-            Name = "Single",
+            Name = "Single 1",
             Capacity = 1,
             HotelId = 1
         },
         new Room
         {
             Id = 2,
-            Name = "Double",
+            Name = "Double 1",
             Capacity = 2,
             HotelId = 1
         },
         new Room
         {
             Id = 3,
-            Name = "Deluxe",
+            Name = "Deluxe 1",
             Capacity = 3,
             HotelId = 1
         },
         new Room
         {
             Id = 4,
-            Name = "Single",
+            Name = "Single 2",
+            Capacity = 1,
+            HotelId = 1
+        },
+        new Room
+        {
+            Id = 5,
+            Name = "Double 2",
+            Capacity = 2,
+            HotelId = 1
+        },
+        new Room
+        {
+            Id = 6,
+            Name = "Deluxe 2",
+            Capacity = 3,
+            HotelId = 1
+        },
+        new Room
+        {
+            Id = 7,
+            Name = "Single 1",
             Capacity = 1,
             HotelId = 2
         },
         new Room
         {
-            Id = 5,
-            Name = "Double",
+            Id = 8,
+            Name = "Double 1",
             Capacity = 2,
             HotelId = 2
         },
         new Room
         {
-            Id = 6,
-            Name = "Deluxe",
+            Id = 9,
+            Name = "Deluxe 1",
             Capacity = 3,
             HotelId = 2
         },
         new Room
         {
-            Id = 7,
-            Name = "Single",
+            Id = 10,
+            Name = "Single 2",
+            Capacity = 1,
+            HotelId = 2
+        },
+        new Room
+        {
+            Id = 11,
+            Name = "Double 2",
+            Capacity = 2,
+            HotelId = 2
+        },
+        new Room
+        {
+            Id = 12,
+            Name = "Deluxe 2",
+            Capacity = 3,
+            HotelId = 2
+        },
+        new Room
+        {
+            Id = 13,
+            Name = "Single 1",
             Capacity = 1,
             HotelId = 3
         },
         new Room
         {
-            Id = 8,
-            Name = "Double",
+            Id = 14,
+            Name = "Double 1",
             Capacity = 2,
             HotelId = 3
         },
         new Room
         {
-            Id = 9,
-            Name = "Deluxe",
+            Id = 15,
+            Name = "Deluxe 1",
+            Capacity = 3,
+            HotelId = 3
+        },
+        new Room
+        {
+            Id = 16,
+            Name = "Single 2",
+            Capacity = 1,
+            HotelId = 3
+        },
+        new Room
+        {
+            Id = 17,
+            Name = "Double 2",
+            Capacity = 2,
+            HotelId = 3
+        },
+        new Room
+        {
+            Id = 18,
+            Name = "Deluxe 2",
             Capacity = 3,
             HotelId = 3
         }

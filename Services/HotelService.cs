@@ -17,7 +17,7 @@ public class HotelService : IService<Hotel>
         return hotel != null && hotel.Id != 0 && hotel.Name != null && hotel.Rooms != null;
     }
 
-    public IEnumerable<Hotel> GetByName(String name)
+    public IEnumerable<Hotel> GetBy(String name)
     {
         IEnumerable<Hotel> rtnVal;
         using (Context)

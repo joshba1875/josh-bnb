@@ -17,9 +17,9 @@ public class HotelController : ControllerBase
         _hotelService = hotelService;
     }
 
-    [HttpGet(Name = "GetHotels")]
-    public IEnumerable<Hotel> Get()
+    [HttpGet(Name = "Hotel")]
+    public IEnumerable<Hotel> Hotel(string name)
     {
-        return _hotelService.GetAll();
+        return _hotelService.GetBy(name);
     }
 }

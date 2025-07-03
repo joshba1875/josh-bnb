@@ -1,8 +1,8 @@
 namespace josh_bnb.Models;
 
-public class Room
+public class Room : APIEntity
 {
-    public int Id { get; set; }
+    public override string SearchKey => "Reference";
     public int HotelId { get; set; }
     public int Capacity { get; set; }
     public string Name { get; set; }
