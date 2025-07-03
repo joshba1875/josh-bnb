@@ -1439,6 +1439,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.AspNetCore.OpenApi >= 8.0.8",
+      "Microsoft.EntityFrameworkCore >= 9.0.6",
       "Microsoft.EntityFrameworkCore.InMemory >= 9.0.6",
       "NSwag.AspNetCore >= 14.4.0",
       "Swashbuckle.AspNetCore >= 9.0.1"
@@ -1489,6 +1490,10 @@
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[8.0.8, )"
+          },
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[9.0.6, )"
           },
           "Microsoft.EntityFrameworkCore.InMemory": {
             "target": "Package",

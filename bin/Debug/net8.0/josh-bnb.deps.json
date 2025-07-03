@@ -9,6 +9,7 @@
       "josh-bnb/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": "8.0.8",
+          "Microsoft.EntityFrameworkCore": "9.0.6",
           "Microsoft.EntityFrameworkCore.InMemory": "9.0.6",
           "NSwag.AspNetCore": "14.4.0",
           "Swashbuckle.AspNetCore": "9.0.1"

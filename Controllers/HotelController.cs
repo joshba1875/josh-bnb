@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using josh_bnb.Models;
+using josh_bnb.Interfaces;
 
 namespace josh_bnb.Controllers;
 
@@ -8,20 +9,17 @@ namespace josh_bnb.Controllers;
 public class HotelController : ControllerBase
 {
     private readonly ILogger<HotelController> _logger;
+    private readonly IService<Hotel> _hotelService;
 
-    public HotelController(ILogger<HotelController> logger)
+    public HotelController(ILogger<HotelController> logger, IService<Hotel> hotelService)
     {
         _logger = logger;
+        _hotelService = hotelService;
     }
 
     [HttpGet(Name = "GetHotels")]
     public IEnumerable<Hotel> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new Hotel
-        {
-            Id = index,
-            Name = "Hotel " + index
-        })
-        .ToArray();
+        return _hotelService.GetAll();
     }
 }

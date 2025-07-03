@@ -4,5 +4,5 @@ public class Hotel
 {
     public int Id { get; set; }
     public String Name { get; set; }
-    // Collection of rooms
+    public virtual List<Room> Rooms { get; set; }
 }
