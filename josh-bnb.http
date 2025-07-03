@@ -1,0 +1,6 @@
+@josh_bnb_HostAddress = http://localhost:5091
+
+GET {{josh_bnb_HostAddress}}/hotel/
+Accept: application/json
+
+###
