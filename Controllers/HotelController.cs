@@ -5,7 +5,7 @@ using josh_bnb.Interfaces;
 namespace josh_bnb.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]/[action]")]
 public class HotelController : ControllerBase
 {
     private readonly ILogger<HotelController> _logger;
@@ -17,9 +17,15 @@ public class HotelController : ControllerBase
         _hotelService = hotelService;
     }
 
-    [HttpGet(Name = "Hotel")]
-    public IEnumerable<Hotel> Hotel(string name)
+    [HttpGet(Name = "GetByName")]
+    public IEnumerable<Hotel> GetByName(string name)
     {
         return _hotelService.GetBy(name);
+    }
+
+    [HttpGet(Name = "GetAllHotels")]
+    public IEnumerable<Hotel> GetAll()
+    {
+        return _hotelService.GetAll();
     }
 }
