@@ -4,7 +4,6 @@ using josh_bnb.Interfaces;
 using josh_bnb.Models;
 using josh_bnb.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
 using josh_bnb.BL;
 
 var builder = WebApplication.CreateBuilder(args);

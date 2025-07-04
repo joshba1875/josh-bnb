@@ -1,10 +1,7 @@
 using josh_bnb.Models;
 using josh_bnb.Context;
-using Microsoft.AspNetCore.Mvc;
 using josh_bnb.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using josh_bnb.Controllers.ApiModels;
-using System.Linq;
 
 public class RoomService : IService<Room>
 {

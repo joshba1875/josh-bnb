@@ -1,9 +1,12 @@
-using System;
 using josh_bnb.Controllers.ApiModels;
 using josh_bnb.Interfaces;
 using josh_bnb.Models;
 
 namespace josh_bnb.BL;
+
+/// <summary>
+/// Represents a business layer to combine multiple domains used in a room booking system
+/// </summary>
 
 public class RoomBookingBusinessLayer : IBusinessLayer<Room, Booking>
 {
@@ -11,20 +14,16 @@ public class RoomBookingBusinessLayer : IBusinessLayer<Room, Booking>
     {
         BookingCriteria bookingCriteria = (BookingCriteria)criteria;
         IEnumerable<Room> rtnVal;
-        // Get all bookings
-        Console.WriteLine("Bookings: " + bookings);
-        // Get all rooms
-        Console.WriteLine("Rooms: " + rooms);
         // Get all rooms with appropriate capacity
         IEnumerable<Room> suitableRooms = rooms.Where(x => x.Capacity >= bookingCriteria.NumPeople);
-        Console.WriteLine("SuitableRooms: " + suitableRooms);
         // Check which of these rooms have bookings
         IEnumerable<Booking> bookingsForSuitableRooms = bookings.Where(x => suitableRooms.Any(y => y.Id == x.Room.Id));
-        Console.WriteLine("BookingsForSuitableRooms: " + bookingsForSuitableRooms);
         // Filter out suitable rooms with date clash
-        rtnVal = suitableRooms.Where(x => !bookingsForSuitableRooms.Any(y => x.Id == y.Room.Id && y.CheckInDate <= bookingCriteria.CheckInDate && y.CheckOutDate > bookingCriteria.CheckInDate));
-        Console.WriteLine("Available Rooms: " + rtnVal);
-
+        rtnVal = suitableRooms.Where(x => !bookingsForSuitableRooms.Any(y => x.Id == y.Room.Id &&
+                                                                        (y.CheckInDate == bookingCriteria.CheckInDate ||
+                                                                         y.CheckOutDate == bookingCriteria.CheckOutDate ||
+                                                                         (y.CheckInDate < bookingCriteria.CheckInDate && y.CheckOutDate > bookingCriteria.CheckInDate) ||
+                                                                         (y.CheckInDate > bookingCriteria.CheckInDate && bookingCriteria.CheckOutDate > y.CheckInDate))));
         return rtnVal;
     }
 
@@ -43,7 +42,6 @@ public class RoomBookingBusinessLayer : IBusinessLayer<Room, Booking>
                 rtnVal = true;
             }
         }
-
         return rtnVal;
     }
 }

@@ -63,6 +63,5 @@ public class RoomBookingController : ControllerBase
         {
             return new Response { Status = 400, Message = "Room not booked, please check dates and RoomId requested" };
         }
-
     }
 }
