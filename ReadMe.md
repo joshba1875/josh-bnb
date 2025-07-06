@@ -33,13 +33,14 @@
 
 # TODO
 
-- Implement an API Gateway (authentication, reverse proxy, load balanacing, connection pooling)
+- Implement an API Gateway (authentication, reverse proxy, load balancing, connection pooling)
 - Implement a real database
 - Implement CRUD based access authorisation on incoming requests
-- Fruther abstract interfaces for services mutable / imutable data structures (e.g Hotel and room immutable, booking mutable)
+- Further abstract interfaces to expose service CRUD based on collection mutability (e.g. IServiceMutable<T> and IServiceImmutable<T>)
 - Implement DataAccessLayer to communicate with remote database
 - Further normalise the entities (rooms have a type to avoid further repeating groups)
-- Add unit tests (suggest NUNIT)
+- Add unit tests to BLs and Services,incl. mocks for DBContext (suggest NUNIT /and Moq)
 - Host on Azure
-- Optimise data fecthing via pagination and parameterisation
-- Research async with EF, likely that we want to make our API endpoints async and utilise tasks to support concurrent manipualtion of DBContext
+- Optimise data fetching via pagination and parameterisation
+-Optimise api performance and concurrency using async and tasks
+- further tweak EF implementation to better support optimisation for concurrent modification of dbcontext
