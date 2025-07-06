@@ -39,8 +39,8 @@
 - Further abstract interfaces to expose service CRUD based on collection mutability (e.g. IServiceMutable<T> and IServiceImmutable<T>)
 - Implement DataAccessLayer to communicate with remote database
 - Further normalise the entities (rooms have a type to avoid further repeating groups)
-- Add unit tests to BLs and Services,incl. mocks for DBContext (suggest NUNIT /and Moq)
+- Add unit tests to BLs and Services, incl. mocks for DBContext (suggest NUNIT and Moq)
 - Host on Azure
 - Optimise data fetching via pagination and parameterisation
--Optimise api performance and concurrency using async and tasks
-- further tweak EF implementation to better support optimisation for concurrent modification of dbcontext
+- Optimise api performance and concurrency using async and tasks
+- Further tweak EF implementation to better support optimisation for concurrent modification of dbcontext
