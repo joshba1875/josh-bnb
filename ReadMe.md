@@ -6,6 +6,7 @@
  - The app uses Entity Framework as the ORM to communicate with an in-memory database (please note, I have never used EF before, but I have helped to roll our own ORM in .Net and used Prisma for NodeJs)
  - A basic in-memory database is used due to time constraints, this is seeded with data upon running the app
  - Shutting down / restarting the app removes all data, ready for re-seeding
+ - Alternatively, you can call the booking delete methods to remove a single booking or purge the only mutable dataset
 
 # Get started
 
@@ -41,4 +42,4 @@
 - Add unit tests (suggest NUNIT)
 - Host on Azure
 - Optimise data fecthing via pagination and parameterisation
-- Research async with EF, hihgliy suspect there are blocking or synchronicity issues if this API was used by multiple users. First time using EF
+- Research async with EF, likely that we want to make our API endpoints async and utilise tasks to support concurrent manipualtion of DBContext
