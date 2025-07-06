@@ -18,14 +18,34 @@ public class HotelController : ControllerBase
     }
 
     [HttpGet(Name = "GetByName")]
-    public IEnumerable<Hotel> GetByName(string name)
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    public IActionResult GetByName(string name)
     {
-        return _hotelService.GetBy(name);
+        IEnumerable<Hotel> serviceResponse = _hotelService.GetBy(name);
+        if (serviceResponse.Count() > 0)
+        {
+            return Ok(serviceResponse);
+        }
+        else
+        {
+            return NotFound();
+        }
     }
 
     [HttpGet(Name = "GetAllHotels")]
-    public IEnumerable<Hotel> GetAll()
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    public IActionResult GetAll()
     {
-        return _hotelService.GetAll();
+        IEnumerable<Hotel> serviceResponse = _hotelService.GetAll();
+        if (serviceResponse.Count() > 0)
+        {
+            return Ok(serviceResponse);
+        }
+        else
+        {
+            return NotFound();
+        }
     }
 }

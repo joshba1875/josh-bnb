@@ -48,4 +48,14 @@ public class RoomService : IService<Room>
     {
         throw new NotImplementedException();
     }
+
+    public Response Delete(string reference)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Response DeleteAll()
+    {
+        throw new NotImplementedException();
+    }
 }

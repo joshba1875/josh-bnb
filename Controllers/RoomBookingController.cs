@@ -24,44 +24,127 @@ public class RoomBookingController : ControllerBase
     }
 
     [HttpGet(Name = "GetRoomAvailability")]
-    public IEnumerable<Room> GetRoomAvailability([FromQuery] BookingCriteria criteria)
+    [ProducesResponseType(200)]
+    [ProducesResponseType(500)]
+    public IActionResult GetRoomAvailability([FromQuery] BookingCriteria criteria)
     {
-        IEnumerable<Booking> allBookings = _bookingService.GetAll();
-        IEnumerable<Room> allRooms = _roomService.GetAll();
-        return _roomBookingBusinessLayer.Filter(allRooms, allBookings, criteria);
+        try
+        {
+            IEnumerable<Booking> allBookings = _bookingService.GetAll();
+            IEnumerable<Room> allRooms = _roomService.GetAll();
+            return Ok(_roomBookingBusinessLayer.Filter(allRooms, allBookings, criteria));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
 
     [HttpGet(Name = "GetAllBookings")]
-    public IEnumerable<Booking> GetAllBookings()
+    [ProducesResponseType(200)]
+    public IActionResult GetAllBookings()
     {
-        return _bookingService.GetAll();
+        return Ok(_bookingService.GetAll());
     }
 
     [HttpGet(Name = "GetAllRooms")]
-    public IEnumerable<Room> GetAllRooms()
+    [ProducesResponseType(200)]
+    public IActionResult GetAllRooms()
     {
-        return _roomService.GetAll();
+        return Ok(_roomService.GetAll());
     }
 
     [HttpGet(Name = "GetByReference")]
-    public IEnumerable<Booking> GetByReference(string reference)
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(500)]
+    public IActionResult GetByReference(string reference)
     {
-        return _bookingService.GetBy(reference);
+        try
+        {
+            IEnumerable<Booking> serviceResponse = _bookingService.GetBy(reference);
+            if (serviceResponse.Count() > 0)
+            {
+                return Ok(serviceResponse);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
 
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(500)]
     [HttpPut(Name = "PutBooking")]
-    public Response MakeBooking([FromQuery] BookingRequest bookingRequest)
+    public IActionResult MakeBooking([FromQuery] BookingRequest bookingRequest)
     {
-        IEnumerable<Booking> allBookings = _bookingService.GetAll();
-        IEnumerable<Room> allRooms = _roomService.GetAll();
-        bool isRequestValid = _roomBookingBusinessLayer.Validate(allRooms, allBookings, bookingRequest);
-        if (isRequestValid)
+        try
         {
-            return _bookingService.Insert(bookingRequest);
+            IEnumerable<Booking> allBookings = _bookingService.GetAll();
+            IEnumerable<Room> allRooms = _roomService.GetAll();
+            bool isRequestValid = _roomBookingBusinessLayer.Validate(allRooms, allBookings, bookingRequest);
+            if (isRequestValid)
+            {
+                Response serviceResponse = _bookingService.Insert(bookingRequest);
+                return StatusCode(serviceResponse.StatusCode, serviceResponse.Message);
+            }
+            else
+            {
+                return StatusCode(400, "Room not booked, please check dates and RoomId requested");
+            }
         }
-        else
+        catch (Exception ex)
         {
-            return new Response { Status = 400, Message = "Room not booked, please check dates and RoomId requested" };
+            return StatusCode(500, ex.Message);
+        }
+    }
+    [HttpDelete(Name = "DeleteBooking")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(500)]
+    public IActionResult DeleteBooking([FromQuery] string reference)
+    {
+        try
+        {
+            Response serviceResponse = _bookingService.Delete(reference);
+            if (serviceResponse.StatusCode >= 200 && serviceResponse.StatusCode <= 299)
+            {
+                return Ok(serviceResponse);
+            }
+            else if (serviceResponse.StatusCode == 404)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return StatusCode(serviceResponse.StatusCode, serviceResponse.Message);
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpDelete(Name = "DeleteAllBookings")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(500)]
+    public IActionResult DeleteAll()
+    {
+        try
+        {
+            Response serviceResponse = _bookingService.DeleteAll();
+            return StatusCode(serviceResponse.StatusCode, serviceResponse.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
         }
     }
 }

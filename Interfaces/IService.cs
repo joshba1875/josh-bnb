@@ -11,4 +11,6 @@ public interface IService<T>
     IEnumerable<T> GetAll();
     IEnumerable<T> GetBy(string keyValue);
     Response Insert(Criteria criteria);
+    Response Delete(string reference);
+    Response DeleteAll();
 }

@@ -48,4 +48,14 @@ public class HotelService : IService<Hotel>
     {
         throw new NotImplementedException();
     }
+
+    public Response Delete(string reference)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Response DeleteAll()
+    {
+        throw new NotImplementedException();
+    }
 }

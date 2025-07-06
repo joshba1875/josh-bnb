@@ -37,7 +37,7 @@ public class BookingService : IService<Booking>
         BookingRequest request = (BookingRequest)bookingRequest;
         // Generate a booking reference
         string reference = Guid.NewGuid().ToString();
-        Response rtnVal = new Response { Status = 200, Message = "Booking Successful | Reference: " + reference };
+        Response rtnVal = new Response { StatusCode = 201, Message = "Booking Successful | Reference: " + reference };
         // Construct domain level object from request
         Booking newBooking = new Booking() { CheckInDate = request.CheckInDate, CheckOutDate = request.CheckOutDate, NumPeople = request.NumPeople, Reference = reference };
         // Get the Room
@@ -53,8 +53,33 @@ public class BookingService : IService<Booking>
         }
         else
         {
-            rtnVal = new Response { Status = 400, Message = "Booking Unsuccessful, please inspect request" };
+            rtnVal = new Response { StatusCode = 400, Message = "Booking Unsuccessful, please inspect request" };
         }
         return rtnVal;
+    }
+
+    public Response Delete(string reference)
+    {
+        Response rtnVal;
+        if (Context.Bookings.Any(x => x.Reference == reference))
+        {
+            var bookings = Context.Bookings.Where(x => x.Reference == reference);
+            Context.Bookings.RemoveRange(bookings);
+            Context.SaveChanges();
+            rtnVal = new Response { StatusCode = 200, Message = $"Booking successfully deleted for | Reference: {reference}" };
+        }
+        else
+        {
+            rtnVal = new Response { StatusCode = 404, Message = $"Booking not found for | Reference: {reference}" };
+        }
+
+        return rtnVal;
+    }
+
+    public Response DeleteAll()
+    {
+        Context.Bookings.RemoveRange(Context.Bookings);
+        Context.SaveChanges();
+        return new Response { StatusCode = 200, Message = "All Bookings Deleted" };
     }
 }
